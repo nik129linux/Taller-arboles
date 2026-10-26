@@ -1,0 +1,152 @@
+[
+  {
+    "common_name": "Palma de cera",
+    "scientific_name": "Ceroxylon quindiuense",
+    "order": "Arecales",
+    "family": "Arecaceae",
+    "genus": "Ceroxylon",
+    "regions": ["Andina"],
+    "height_m": 60,
+    "description": "Árbol nacional de Colombia y la palma más alta del mundo. Crece en los bosques de niebla del Valle de Cocora."
+  },
+  {
+    "common_name": "Guayacán amarillo",
+    "scientific_name": "Handroanthus chrysanthus",
+    "order": "Lamiales",
+    "family": "Bignoniaceae",
+    "genus": "Handroanthus",
+    "regions": ["Caribe", "Andina", "Orinoquía"],
+    "height_m": 25,
+    "description": "Pierde sus hojas en temporada seca y se cubre por completo de flores amarillas. Su madera es muy dura."
+  },
+  {
+    "common_name": "Guayacán rosado",
+    "scientific_name": "Tabebuia rosea",
+    "order": "Lamiales",
+    "family": "Bignoniaceae",
+    "genus": "Tabebuia",
+    "regions": ["Caribe", "Andina", "Pacífica"],
+    "height_m": 30,
+    "description": "Conocido como roble morado; sus flores rosadas tiñen calles y parques de muchas ciudades del país."
+  },
+  {
+    "common_name": "Ceiba",
+    "scientific_name": "Ceiba pentandra",
+    "order": "Malvales",
+    "family": "Malvaceae",
+    "genus": "Ceiba",
+    "regions": ["Caribe", "Amazonía", "Andina"],
+    "height_m": 70,
+    "description": "Árbol sagrado para muchos pueblos indígenas, con raíces tabulares gigantes y frutos que liberan fibra algodonosa."
+  },
+  {
+    "common_name": "Samán",
+    "scientific_name": "Samanea saman",
+    "order": "Fabales",
+    "family": "Fabaceae",
+    "genus": "Samanea",
+    "regions": ["Caribe", "Orinoquía"],
+    "height_m": 25,
+    "description": "Su copa en forma de sombrilla da una sombra enorme. Sus hojas se pliegan al anochecer y cuando llueve."
+  },
+  {
+    "common_name": "Cámbulo",
+    "scientific_name": "Erythrina poeppigiana",
+    "order": "Fabales",
+    "family": "Fabaceae",
+    "genus": "Erythrina",
+    "regions": ["Andina"],
+    "height_m": 30,
+    "description": "Sus flores naranjas atraen colibríes y loros. Se siembra para dar sombra a los cultivos de café."
+  },
+  {
+    "common_name": "Nogal cafetero",
+    "scientific_name": "Cordia alliodora",
+    "order": "Boraginales",
+    "family": "Boraginaceae",
+    "genus": "Cordia",
+    "regions": ["Andina", "Caribe"],
+    "height_m": 35,
+    "description": "Árbol maderable muy valorado que crece junto a los cafetales del Eje Cafetero."
+  },
+  {
+    "common_name": "Roble andino",
+    "scientific_name": "Quercus humboldtii",
+    "order": "Fagales",
+    "family": "Fagaceae",
+    "genus": "Quercus",
+    "regions": ["Andina"],
+    "height_m": 25,
+    "description": "El único roble nativo de Sudamérica. Forma robledales en las cordilleras y está en peligro por la tala."
+  },
+  {
+    "common_name": "Yarumo",
+    "scientific_name": "Cecropia peltata",
+    "order": "Rosales",
+    "family": "Urticaceae",
+    "genus": "Cecropia",
+    "regions": ["Andina", "Pacífica", "Amazonía"],
+    "height_m": 20,
+    "description": "Especie pionera que coloniza claros del bosque. Sus hojas plateadas son alimento de los perezosos."
+  },
+  {
+    "common_name": "Caracolí",
+    "scientific_name": "Anacardium excelsum",
+    "order": "Sapindales",
+    "family": "Anacardiaceae",
+    "genus": "Anacardium",
+    "regions": ["Caribe", "Andina"],
+    "height_m": 40,
+    "description": "Gigante de los bosques ribereños, pariente del marañón. Su semilla tiene forma de caracol."
+  },
+  {
+    "common_name": "Cedro",
+    "scientific_name": "Cedrela odorata",
+    "order": "Sapindales",
+    "family": "Meliaceae",
+    "genus": "Cedrela",
+    "regions": ["Amazonía", "Pacífica", "Andina"],
+    "height_m": 40,
+    "description": "Su madera aromática se usa en ebanistería. La sobreexplotación la ha convertido en especie vulnerable."
+  },
+  {
+    "common_name": "Arrayán",
+    "scientific_name": "Myrcianthes leucoxyla",
+    "order": "Myrtales",
+    "family": "Myrtaceae",
+    "genus": "Myrcianthes",
+    "regions": ["Andina"],
+    "height_m": 15,
+    "description": "Árbol de la sabana de Bogotá con tronco liso y rojizo; sus frutos alimentan a muchas aves."
+  },
+  {
+    "common_name": "Siete cueros",
+    "scientific_name": "Andesanthus lepidotus",
+    "order": "Myrtales",
+    "family": "Melastomataceae",
+    "genus": "Andesanthus",
+    "regions": ["Andina"],
+    "height_m": 15,
+    "description": "Su corteza se desprende en láminas y florece en tonos morados intensos en los bosques altoandinos."
+  },
+  {
+    "common_name": "Mangle rojo",
+    "scientific_name": "Rhizophora mangle",
+    "order": "Malpighiales",
+    "family": "Rhizophoraceae",
+    "genus": "Rhizophora",
+    "regions": ["Caribe", "Pacífica"],
+    "height_m": 20,
+    "description": "Vive entre el mar y la tierra sobre raíces zancudas. Protege las costas y es cuna de peces y crustáceos."
+  },
+  {
+    "common_name": "Abarco",
+    "scientific_name": "Cariniana pyriformis",
+    "order": "Ericales",
+    "family": "Lecythidaceae",
+    "genus": "Cariniana",
+    "regions": ["Caribe", "Andina"],
+    "height_m": 50,
+    "description": "Uno de los árboles más altos del Magdalena Medio. Está en peligro crítico por la extracción de su madera."
+  }
+]

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Árboles de Colombia</title>
+  <meta name="description" content="Caso de estudio: estructuras de datos de árbol aplicadas a la flora nativa de Colombia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <nav class="nav">
+    <a href="#inicio" class="nav__brand">🌳 Taller de Árboles</a>
+    <ul class="nav__links">
+      <li><a href="#concepto">Concepto</a></li>
+      <li><a href="#taxonomia">Taxonomía</a></li>
+      <li><a href="#buscador">Buscador BST</a></li>
+      <li><a href="#recorridos">Recorridos</a></li>
+      <li><a href="#galeria">Especies</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero" id="inicio">
+    <div class="hero__media" data-photo="Ceroxylon quindiuense"></div>
+    <div class="hero__shade"></div>
+    <div class="hero__content">
+      <p class="eyebrow">Caso de estudio · Estructuras de datos en Python</p>
+      <h1 class="hero__title" data-split>Árboles de Colombia</h1>
+      <p class="hero__lead">Organizamos la flora nativa del país con dos estructuras de árbol: un <strong>árbol taxonómico n-ario</strong> y un <strong>árbol binario de búsqueda</strong>.</p>
+      <a href="#concepto" class="btn">Explorar</a>
+    </div>
+    <div class="hero__scroll" aria-hidden="true">Desliza<span></span></div>
+  </header>
+
+  <main>
+    <section class="concept" id="concepto">
+      <div class="concept__pin">
+        <div class="concept__text">
+          <p class="eyebrow">01 · Concepto</p>
+          <h2>¿Qué es un árbol?</h2>
+          <ol class="terms">
+            <li data-step="0"><strong>Raíz:</strong> el nodo inicial, sin padre. Aquí: «Árboles de Colombia».</li>
+            <li data-step="1"><strong>Nodos internos:</strong> tienen hijos. Representan orden, familia y género.</li>
+            <li data-step="2"><strong>Aristas:</strong> conectan a cada padre con sus hijos.</li>
+            <li data-step="3"><strong>Hojas:</strong> nodos sin hijos. Cada hoja es una especie.</li>
+            <li data-step="4"><strong>Altura:</strong> el camino más largo de la raíz a una hoja.</li>
+          </ol>
+        </div>
+        <svg class="concept__svg" viewBox="0 0 400 320" aria-label="Diagrama de un árbol">
+          <g class="edges">
+            <path d="M200 50 L110 140"/><path d="M200 50 L290 140"/>
+            <path d="M110 140 L60 240"/><path d="M110 140 L160 240"/>
+            <path d="M290 140 L250 240"/><path d="M290 140 L340 240"/>
+          </g>
+          <g class="nodes">
+            <circle class="n-root" cx="200" cy="50" r="20"/>
+            <circle class="n-inner" cx="110" cy="140" r="17"/>
+            <circle class="n-inner" cx="290" cy="140" r="17"/>
+            <circle class="n-leaf" cx="60" cy="240" r="14"/>
+            <circle class="n-leaf" cx="160" cy="240" r="14"/>
+            <circle class="n-leaf" cx="250" cy="240" r="14"/>
+            <circle class="n-leaf" cx="340" cy="240" r="14"/>
+          </g>
+          <g class="height-mark">
+            <path d="M380 50 L380 240"/>
+            <text x="372" y="150" text-anchor="end">h = 2</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="section" id="taxonomia">
+      <div class="section__head reveal">
+        <p class="eyebrow">02 · Árbol n-ario</p>
+        <h2>Árbol taxonómico</h2>
+        <p>Cada especie se inserta bajando por <em>Orden → Familia → Género</em>. Los nodos que ya existen se reutilizan, así que las especies emparentadas comparten rama. Haz clic en un nodo para plegarlo o desplegarlo, y en una especie para ver su ruta desde la raíz.</p>
+      </div>
+      <div class="legend reveal">
+        <span><i class="dot dot--root"></i>Raíz</span>
+        <span><i class="dot dot--order"></i>Orden</span>
+        <span><i class="dot dot--family"></i>Familia</span>
+        <span><i class="dot dot--genus"></i>Género</span>
+        <span><i class="dot dot--species"></i>Especie</span>
+      </div>
+      <div class="tree-card reveal">
+        <div class="tree-scroll"><svg id="taxonomy-svg"></svg></div>
+        <p class="path-out" id="path-out">Selecciona una especie para ver su camino.</p>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="buscador">
+      <div class="section__head reveal">
+        <p class="eyebrow">03 · Árbol binario de búsqueda</p>
+        <h2>Buscador BST</h2>
+        <p>Los nombres comunes se guardan en un BST: a la izquierda los menores y a la derecha los mayores en orden alfabético. Cada comparación descarta un subárbol entero.</p>
+      </div>
+      <form class="search reveal" id="search-form" autocomplete="off">
+        <label for="search-input" class="sr-only">Nombre común</label>
+        <input id="search-input" type="search" placeholder="Ej: Ceiba, Samán, Yarumo…" list="suggestions">
+        <datalist id="suggestions"></datalist>
+        <button class="btn" type="submit">Buscar</button>
+      </form>
+      <div class="search-result" id="search-result" aria-live="polite"></div>
+      <div class="tree-card reveal">
+        <div class="tree-scroll"><svg id="bst-svg"></svg></div>
+      </div>
+    </section>
+
+    <section class="section" id="recorridos">
+      <div class="section__head reveal">
+        <p class="eyebrow">04 · Recorridos</p>
+        <h2>Formas de recorrer un árbol</h2>
+        <p>Python devuelve el orden de visita y la interfaz lo anima sobre el BST.</p>
+      </div>
+      <div class="traversal-buttons reveal">
+        <button class="chip" data-kind="preorder">Preorden <small>raíz · izq · der</small></button>
+        <button class="chip" data-kind="inorder">Inorden <small>izq · raíz · der</small></button>
+        <button class="chip" data-kind="postorder">Postorden <small>izq · der · raíz</small></button>
+        <button class="chip" data-kind="level">Por niveles <small>BFS</small></button>
+      </div>
+      <div class="tree-card reveal">
+        <div class="tree-scroll"><svg id="traversal-svg"></svg></div>
+        <ol class="sequence" id="sequence"></ol>
+      </div>
+    </section>
+
+    <section class="stats" id="estadisticas">
+      <div class="stat reveal"><span class="stat__num" data-stat="taxonomy.size">0</span><span>nodos en el árbol taxonómico</span></div>
+      <div class="stat reveal"><span class="stat__num" data-stat="taxonomy.leaves">0</span><span>hojas (especies)</span></div>
+      <div class="stat reveal"><span class="stat__num" data-stat="taxonomy.height">0</span><span>altura del árbol taxonómico</span></div>
+      <div class="stat reveal"><span class="stat__num" data-stat="bst.height">0</span><span>altura del BST</span></div>
+    </section>
+
+    <section class="section" id="galeria">
+      <div class="section__head reveal">
+        <p class="eyebrow">05 · Hojas del árbol</p>
+        <h2>Especies nativas</h2>
+        <p>Cada tarjeta es una hoja del árbol taxonómico.</p>
+      </div>
+      <div class="gallery" id="gallery"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Taller de estructuras de datos · Árboles en Python · Fotos: Wikipedia / Wikimedia Commons</p>
+  </footer>
+
+  <dialog class="modal" id="modal">
+    <button class="modal__close" aria-label="Cerrar">×</button>
+    <div class="modal__img"></div>
+    <div class="modal__body">
+      <p class="eyebrow modal__sci"></p>
+      <h3 class="modal__name"></h3>
+      <p class="modal__desc"></p>
+      <dl class="modal__facts"></dl>
+      <ol class="modal__path"></ol>
+    </div>
+  </dialog>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
