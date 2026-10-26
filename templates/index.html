@@ -4,80 +4,118 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Árboles de Colombia</title>
-  <meta name="description" content="Caso de estudio: estructuras de datos de árbol aplicadas a la flora nativa de Colombia.">
+  <meta name="description" content="Taller de estructuras de datos: árboles n-arios, BST y AVL aplicados a la flora nativa de Colombia.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
+  <div class="cursor" aria-hidden="true"></div>
   <div class="progress" aria-hidden="true"><span></span></div>
 
   <nav class="nav">
-    <a href="#inicio" class="nav__brand">🌳 Taller de Árboles</a>
+    <a href="#inicio" class="nav__brand"><span class="nav__logo">▲</span> ÁRBOLES<span class="accent">/LAB</span></a>
     <ul class="nav__links">
       <li><a href="#concepto">Concepto</a></li>
       <li><a href="#taxonomia">Taxonomía</a></li>
-      <li><a href="#buscador">Buscador BST</a></li>
+      <li><a href="#laboratorio">Laboratorio</a></li>
+      <li><a href="#avl">BST vs AVL</a></li>
       <li><a href="#recorridos">Recorridos</a></li>
-      <li><a href="#galeria">Especies</a></li>
+      <li><a href="#especies">Especies</a></li>
     </ul>
+    <a href="#laboratorio" class="btn btn--small magnetic">Entrar al lab</a>
   </nav>
 
   <header class="hero" id="inicio">
-    <div class="hero__media" data-photo="Ceroxylon quindiuense"></div>
-    <div class="hero__shade"></div>
-    <div class="hero__content">
-      <p class="eyebrow">Caso de estudio · Estructuras de datos en Python</p>
-      <h1 class="hero__title" data-split>Árboles de Colombia</h1>
-      <p class="hero__lead">Organizamos la flora nativa del país con dos estructuras de árbol: un <strong>árbol taxonómico n-ario</strong> y un <strong>árbol binario de búsqueda</strong>.</p>
-      <a href="#concepto" class="btn">Explorar</a>
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <p class="tag">[ Taller · Estructuras de datos en Python ]</p>
+        <h1 class="hero__title">
+          <span class="line"><span>Árboles</span></span>
+          <span class="line"><span>de <em>Colombia</em></span></span>
+        </h1>
+        <p class="hero__lead">Aprende árboles n-arios, BST y AVL usando la flora nativa del país: insertas, buscas, eliminas y balanceas especies reales mientras ves cada paso animado.</p>
+        <div class="hero__actions">
+          <a href="#concepto" class="btn magnetic">Empezar el taller →</a>
+          <a href="#laboratorio" class="btn btn--ghost magnetic">Ir al laboratorio</a>
+        </div>
+        <ul class="hero__chips">
+          <li><strong data-stat="taxonomy.leaves">15</strong> especies</li>
+          <li><strong data-stat="taxonomy.size">55</strong> nodos</li>
+          <li>BST h=<strong data-stat="bst.height">5</strong></li>
+          <li>AVL h=<strong data-stat="avl.height">4</strong></li>
+        </ul>
+      </div>
+      <div class="hero__collage" aria-hidden="true">
+        <div class="shot shot--1"><div class="photo" data-photo="Ceroxylon quindiuense">🌴</div><span>Palma de cera</span></div>
+        <div class="shot shot--2"><div class="photo" data-photo="Handroanthus chrysanthus">🌼</div><span>Guayacán amarillo</span></div>
+        <div class="shot shot--3"><div class="photo" data-photo="Ceiba pentandra">🌳</div><span>Ceiba</span></div>
+      </div>
     </div>
-    <div class="hero__scroll" aria-hidden="true">Desliza<span></span></div>
   </header>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Árbol n-ario</span><i>✦</i><span>BST</span><i>✦</i><span>AVL</span><i>✦</i><span>Rotaciones</span><i>✦</i><span>Recorridos</span><i>✦</i><span>Profundidad</span><i>✦</i><span>Grado</span><i>✦</i><span>Hojas</span><i>✦</i>
+      <span>Árbol n-ario</span><i>✦</i><span>BST</span><i>✦</i><span>AVL</span><i>✦</i><span>Rotaciones</span><i>✦</i><span>Recorridos</span><i>✦</i><span>Profundidad</span><i>✦</i><span>Grado</span><i>✦</i><span>Hojas</span><i>✦</i>
+    </div>
+  </div>
 
   <main>
     <section class="concept" id="concepto">
       <div class="concept__pin">
         <div class="concept__text">
-          <p class="eyebrow">01 · Concepto</p>
-          <h2>¿Qué es un árbol?</h2>
+          <p class="tag">[01] Concepto</p>
+          <h2 class="split">¿Qué es un árbol?</h2>
           <ol class="terms">
-            <li data-step="0"><strong>Raíz:</strong> el nodo inicial, sin padre. Aquí: «Árboles de Colombia».</li>
-            <li data-step="1"><strong>Nodos internos:</strong> tienen hijos. Representan orden, familia y género.</li>
-            <li data-step="2"><strong>Aristas:</strong> conectan a cada padre con sus hijos.</li>
-            <li data-step="3"><strong>Hojas:</strong> nodos sin hijos. Cada hoja es una especie.</li>
-            <li data-step="4"><strong>Altura:</strong> el camino más largo de la raíz a una hoja.</li>
+            <li><strong>Raíz</strong> El nodo inicial, sin padre: «Árboles de Colombia».</li>
+            <li><strong>Nodos internos</strong> Tienen hijos: orden, familia y género.</li>
+            <li><strong>Aristas</strong> Conectan a cada padre con sus hijos.</li>
+            <li><strong>Hojas</strong> No tienen hijos: cada hoja es una especie.</li>
+            <li><strong>Grado</strong> Número de hijos de un nodo. Aquí, la raíz tiene grado 2.</li>
+            <li><strong>Profundidad y nivel</strong> Aristas desde la raíz hasta el nodo; el nivel es la profundidad + 1.</li>
+            <li><strong>Altura</strong> El camino más largo de la raíz a una hoja.</li>
           </ol>
         </div>
-        <svg class="concept__svg" viewBox="0 0 400 320" aria-label="Diagrama de un árbol">
+        <svg class="concept__svg" viewBox="0 0 420 320" aria-label="Diagrama de un árbol">
+          <g class="levels">
+            <text x="0" y="55">nivel 1</text>
+            <text x="0" y="145">nivel 2</text>
+            <text x="0" y="245">nivel 3</text>
+          </g>
           <g class="edges">
-            <path d="M200 50 L110 140"/><path d="M200 50 L290 140"/>
-            <path d="M110 140 L60 240"/><path d="M110 140 L160 240"/>
-            <path d="M290 140 L250 240"/><path d="M290 140 L340 240"/>
+            <path d="M220 50 L130 140"/><path d="M220 50 L310 140"/>
+            <path d="M130 140 L80 240"/><path d="M130 140 L180 240"/>
+            <path d="M310 140 L270 240"/><path d="M310 140 L360 240"/>
           </g>
           <g class="nodes">
-            <circle class="n-root" cx="200" cy="50" r="20"/>
-            <circle class="n-inner" cx="110" cy="140" r="17"/>
-            <circle class="n-inner" cx="290" cy="140" r="17"/>
-            <circle class="n-leaf" cx="60" cy="240" r="14"/>
-            <circle class="n-leaf" cx="160" cy="240" r="14"/>
-            <circle class="n-leaf" cx="250" cy="240" r="14"/>
-            <circle class="n-leaf" cx="340" cy="240" r="14"/>
+            <circle class="n-root" cx="220" cy="50" r="20"/>
+            <circle class="n-inner" cx="130" cy="140" r="17"/>
+            <circle class="n-inner" cx="310" cy="140" r="17"/>
+            <circle class="n-leaf" cx="80" cy="240" r="14"/>
+            <circle class="n-leaf" cx="180" cy="240" r="14"/>
+            <circle class="n-leaf" cx="270" cy="240" r="14"/>
+            <circle class="n-leaf" cx="360" cy="240" r="14"/>
+          </g>
+          <g class="degree-mark"><text x="250" y="40">grado 2</text></g>
+          <g class="depth-mark">
+            <path d="M60 140 L60 240"/>
+            <text x="20" y="300">profundidad 2</text>
           </g>
           <g class="height-mark">
-            <path d="M380 50 L380 240"/>
-            <text x="372" y="150" text-anchor="end">h = 2</text>
+            <path d="M405 50 L405 240"/>
+            <text x="398" y="300" text-anchor="end">h = 2</text>
           </g>
         </svg>
       </div>
     </section>
 
     <section class="section" id="taxonomia">
-      <div class="section__head reveal">
-        <p class="eyebrow">02 · Árbol n-ario</p>
-        <h2>Árbol taxonómico</h2>
-        <p>Cada especie se inserta bajando por <em>Orden → Familia → Género</em>. Los nodos que ya existen se reutilizan, así que las especies emparentadas comparten rama. Haz clic en un nodo para plegarlo o desplegarlo, y en una especie para ver su ruta desde la raíz.</p>
+      <div class="section__head">
+        <p class="tag">[02] Árbol n-ario</p>
+        <h2 class="split">Árbol taxonómico</h2>
+        <p class="reveal">Cada especie se inserta bajando por <em>Orden → Familia → Género</em>, y los nodos que ya existen se reutilizan. Haz clic en cualquier nodo para ver sus propiedades y plegar o desplegar su rama.</p>
       </div>
       <div class="legend reveal">
         <span><i class="dot dot--root"></i>Raíz</span>
@@ -86,66 +124,144 @@
         <span><i class="dot dot--genus"></i>Género</span>
         <span><i class="dot dot--species"></i>Especie</span>
       </div>
-      <div class="tree-card reveal">
-        <div class="tree-scroll"><svg id="taxonomy-svg"></svg></div>
-        <p class="path-out" id="path-out">Selecciona una especie para ver su camino.</p>
+      <div class="taxo-layout">
+        <div class="panel glow reveal">
+          <div class="tree-scroll"><svg id="taxonomy-svg"></svg></div>
+        </div>
+        <aside class="panel node-panel glow reveal" id="node-panel" aria-live="polite">
+          <p class="tag">Propiedades del nodo</p>
+          <h3 class="node-panel__name">Selecciona un nodo</h3>
+          <p class="node-panel__rank"></p>
+          <dl class="node-panel__facts"></dl>
+          <ol class="crumbs node-panel__path"></ol>
+          <div class="node-panel__actions"></div>
+        </aside>
       </div>
     </section>
 
-    <section class="section section--alt" id="buscador">
-      <div class="section__head reveal">
-        <p class="eyebrow">03 · Árbol binario de búsqueda</p>
-        <h2>Buscador BST</h2>
-        <p>Los nombres comunes se guardan en un BST: a la izquierda los menores y a la derecha los mayores en orden alfabético. Cada comparación descarta un subárbol entero.</p>
+    <section class="section section--alt" id="laboratorio">
+      <div class="section__head">
+        <p class="tag">[03] Árbol binario de búsqueda</p>
+        <h2 class="split">Laboratorio BST</h2>
+        <p class="reveal">Los nombres comunes se ordenan alfabéticamente: los menores van a la izquierda y los mayores a la derecha. Prueba buscar, insertar o eliminar y mira el código de Python que se ejecuta.</p>
       </div>
-      <form class="search reveal" id="search-form" autocomplete="off">
-        <label for="search-input" class="sr-only">Nombre común</label>
-        <input id="search-input" type="search" placeholder="Ej: Ceiba, Samán, Yarumo…" list="suggestions">
+
+      <div class="lab-bar reveal">
+        <div class="tabs" role="tablist">
+          <button class="tab is-active" role="tab" data-tab="search">Buscar</button>
+          <button class="tab" role="tab" data-tab="insert">Insertar</button>
+          <button class="tab" role="tab" data-tab="delete">Eliminar</button>
+        </div>
+        <button class="btn btn--ghost btn--small" id="reset-btn" type="button">↺ Reiniciar árboles</button>
+      </div>
+
+      <div class="lab-forms reveal">
+        <form class="tab-panel is-active inline-form" data-panel="search" id="search-form" autocomplete="off">
+          <label for="search-input" class="sr-only">Nombre común a buscar</label>
+          <input id="search-input" type="search" placeholder="Ej: Ceiba, Samán, Yarumo…" list="suggestions">
+          <button class="btn" type="submit">Buscar</button>
+        </form>
+
+        <form class="tab-panel insert-form" data-panel="insert" id="insert-form" autocomplete="off">
+          <label>Nombre común*<input name="common_name" required placeholder="Chiminango"></label>
+          <label>Nombre científico*<input name="scientific_name" required placeholder="Pithecellobium dulce"></label>
+          <label>Orden*<input name="order" required placeholder="Fabales" list="orders"></label>
+          <label>Familia*<input name="family" required placeholder="Fabaceae" list="families"></label>
+          <label>Género*<input name="genus" required placeholder="Pithecellobium"></label>
+          <label>Regiones<input name="regions" placeholder="Caribe, Andina"></label>
+          <label>Altura (m)<input name="height_m" type="number" min="0" step="1" placeholder="15"></label>
+          <label class="wide">Descripción<input name="description" placeholder="Árbol de sombra muy común en el Valle del Cauca."></label>
+          <div class="wide insert-form__actions">
+            <button class="btn" type="submit">Insertar en los árboles</button>
+            <button class="btn btn--ghost" type="button" id="fill-example">Usar ejemplo</button>
+          </div>
+        </form>
+
+        <form class="tab-panel inline-form" data-panel="delete" id="delete-form" autocomplete="off">
+          <label for="delete-input" class="sr-only">Nombre común a eliminar</label>
+          <input id="delete-input" type="search" placeholder="Nombre a eliminar del BST y del AVL" list="suggestions">
+          <button class="btn btn--danger" type="submit">Eliminar</button>
+        </form>
         <datalist id="suggestions"></datalist>
-        <button class="btn" type="submit">Buscar</button>
-      </form>
-      <div class="search-result" id="search-result" aria-live="polite"></div>
-      <div class="tree-card reveal">
-        <div class="tree-scroll"><svg id="bst-svg"></svg></div>
+        <datalist id="orders"></datalist>
+        <datalist id="families"></datalist>
+      </div>
+
+      <div class="lab-result" id="lab-result" aria-live="polite"></div>
+
+      <div class="lab-layout">
+        <div class="panel glow reveal">
+          <div class="tree-scroll"><svg id="bst-svg"></svg></div>
+        </div>
+        <div class="code reveal">
+          <div class="code__bar"><span></span><span></span><span></span><b id="code-title">trees/bst.py</b></div>
+          <pre class="code__body"><code id="code-body"></code></pre>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="recorridos">
-      <div class="section__head reveal">
-        <p class="eyebrow">04 · Recorridos</p>
-        <h2>Formas de recorrer un árbol</h2>
-        <p>Python devuelve el orden de visita y la interfaz lo anima sobre el BST.</p>
+    <section class="section" id="avl">
+      <div class="section__head">
+        <p class="tag">[04] Balanceo</p>
+        <h2 class="split">BST vs AVL</h2>
+        <p class="reveal">Un BST puede quedar desbalanceado según el orden en que llegan los datos. El AVL mantiene el factor de balance (altura izq − altura der) entre −1 y 1, y para lograrlo aplica rotaciones LL, RR, LR y RL.</p>
+      </div>
+      <div class="versus">
+        <div class="panel glow reveal">
+          <div class="versus__head"><h3>BST</h3><span class="pill">altura <b id="bst-height">–</b></span></div>
+          <div class="tree-scroll"><svg id="bst-compare-svg"></svg></div>
+        </div>
+        <div class="panel glow reveal">
+          <div class="versus__head"><h3>AVL</h3><span class="pill pill--accent">altura <b id="avl-height">–</b></span></div>
+          <div class="tree-scroll"><svg id="avl-svg"></svg></div>
+        </div>
+      </div>
+      <div class="rotations reveal">
+        <h3>Rotaciones aplicadas <span class="pill" id="rotation-count">0</span></h3>
+        <ol id="rotation-list"></ol>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="recorridos">
+      <div class="section__head">
+        <p class="tag">[05] Recorridos</p>
+        <h2 class="split">Formas de recorrer un árbol</h2>
+        <p class="reveal">Python devuelve el orden de visita y la interfaz lo anima sobre el BST.</p>
       </div>
       <div class="traversal-buttons reveal">
         <button class="chip" data-kind="preorder">Preorden <small>raíz · izq · der</small></button>
         <button class="chip" data-kind="inorder">Inorden <small>izq · raíz · der</small></button>
         <button class="chip" data-kind="postorder">Postorden <small>izq · der · raíz</small></button>
-        <button class="chip" data-kind="level">Por niveles <small>BFS</small></button>
+        <button class="chip" data-kind="level">Por niveles <small>BFS · cola</small></button>
       </div>
-      <div class="tree-card reveal">
+      <div class="panel glow reveal">
         <div class="tree-scroll"><svg id="traversal-svg"></svg></div>
         <ol class="sequence" id="sequence"></ol>
       </div>
     </section>
 
-    <section class="stats" id="estadisticas">
-      <div class="stat reveal"><span class="stat__num" data-stat="taxonomy.size">0</span><span>nodos en el árbol taxonómico</span></div>
-      <div class="stat reveal"><span class="stat__num" data-stat="taxonomy.leaves">0</span><span>hojas (especies)</span></div>
-      <div class="stat reveal"><span class="stat__num" data-stat="taxonomy.height">0</span><span>altura del árbol taxonómico</span></div>
-      <div class="stat reveal"><span class="stat__num" data-stat="bst.height">0</span><span>altura del BST</span></div>
+    <section class="gallery-section" id="especies">
+      <div class="gallery-pin">
+        <div class="section__head gallery-head">
+          <p class="tag">[06] Hojas del árbol</p>
+          <h2 class="split">Especies nativas</h2>
+          <p class="reveal">Cada tarjeta es una hoja del árbol taxonómico. Las que insertes en el laboratorio también aparecen aquí.</p>
+        </div>
+        <div class="gallery" id="gallery"></div>
+      </div>
     </section>
 
-    <section class="section" id="galeria">
-      <div class="section__head reveal">
-        <p class="eyebrow">05 · Hojas del árbol</p>
-        <h2>Especies nativas</h2>
-        <p>Cada tarjeta es una hoja del árbol taxonómico.</p>
-      </div>
-      <div class="gallery" id="gallery"></div>
+    <section class="stats" id="estadisticas">
+      <div class="stat reveal"><span class="stat__num" data-stat="taxonomy.size" data-count>0</span><span>nodos en la taxonomía</span></div>
+      <div class="stat reveal"><span class="stat__num" data-stat="taxonomy.degree" data-count>0</span><span>grado máximo</span></div>
+      <div class="stat reveal"><span class="stat__num" data-stat="bst.height" data-count>0</span><span>altura del BST</span></div>
+      <div class="stat reveal"><span class="stat__num" data-stat="avl.height" data-count>0</span><span>altura del AVL</span></div>
     </section>
   </main>
 
   <footer class="footer">
+    <h2 class="footer__cta">Planta tu propio <em>árbol</em>.</h2>
+    <a href="#laboratorio" class="btn magnetic">Volver al laboratorio ↑</a>
     <p>Taller de estructuras de datos · Árboles en Python · Fotos: Wikipedia / Wikimedia Commons</p>
   </footer>
 
@@ -153,11 +269,11 @@
     <button class="modal__close" aria-label="Cerrar">×</button>
     <div class="modal__img"></div>
     <div class="modal__body">
-      <p class="eyebrow modal__sci"></p>
+      <p class="tag modal__sci"></p>
       <h3 class="modal__name"></h3>
       <p class="modal__desc"></p>
       <dl class="modal__facts"></dl>
-      <ol class="modal__path"></ol>
+      <ol class="crumbs modal__path"></ol>
     </div>
   </dialog>
 

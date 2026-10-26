@@ -49,6 +49,49 @@ class SpeciesBST:
             node = node.left if key < node.key else node.right
         return None, visited
 
+    def depth(self, label):
+        node, visited = self.search(label)
+        return len(visited) - 1 if node else None
+
+    def delete(self, label):
+        key = normalize(label)
+        visited = []
+        parent = None
+        node = self.root
+        while node is not None and node.key != key:
+            visited.append(node.key)
+            parent = node
+            node = node.left if key < node.key else node.right
+        if node is None:
+            return {"deleted": None, "case": None, "visited": visited, "successor": None}
+        visited.append(node.key)
+        deleted = node.value
+        successor = None
+        if node.left and node.right:
+            case = "two_children"
+            succ_parent = node
+            succ = node.right
+            while succ.left:
+                succ_parent = succ
+                succ = succ.left
+            successor = succ.key
+            node.key, node.value = succ.key, succ.value
+            if succ_parent is node:
+                succ_parent.right = succ.right
+            else:
+                succ_parent.left = succ.right
+        else:
+            case = "leaf" if node.left is None and node.right is None else "one_child"
+            child = node.left or node.right
+            if parent is None:
+                self.root = child
+            elif parent.left is node:
+                parent.left = child
+            else:
+                parent.right = child
+        self.count -= 1
+        return {"deleted": deleted, "case": case, "visited": visited, "successor": successor}
+
     def inorder(self):
         result = []
         stack = []

@@ -63,6 +63,32 @@ class TaxonomyTree:
         trail = []
         return [n.name for n in trail] if walk(self.root, trail) else []
 
+    def node_info(self, name):
+        trail = self.path_to(name)
+        if not trail:
+            return None
+        node = self.find(name)
+        parent = self.find(trail[-2]) if len(trail) > 1 else None
+        subtree = TaxonomyTree()
+        subtree.root = node
+        return {
+            "name": node.name,
+            "rank": node.rank,
+            "depth": len(trail) - 1,
+            "level": len(trail),
+            "degree": len(node.children),
+            "parent": parent.name if parent else None,
+            "siblings": [c.name for c in parent.children if c is not node] if parent else [],
+            "children": [c.name for c in node.children],
+            "descendants": subtree.size() - 1,
+            "subtree_height": subtree.height(),
+            "leaves_below": len(subtree.leaves()),
+            "path": trail,
+        }
+
+    def degree(self):
+        return max(len(n.children) for n in self.preorder_nodes())
+
     def preorder_nodes(self):
         stack = [self.root]
         while stack:
